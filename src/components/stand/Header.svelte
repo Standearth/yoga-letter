@@ -7,6 +7,9 @@
     <span class="s">
       <a href="https://stand.earth" target="_new">{@html wordmark}</a>
     </span>
+    <span class="asl">
+      <a href="https://speakslouder.org/" target="_new"><img src="assets/asl-light.png" alt="Action Speaks Louder"></a>
+    </span>
   </div>
 </header>
 
@@ -28,12 +31,12 @@
     color: var(--fg);
   }
 
-  .wordmark .d, .wordmark .s {
+  .wordmark .asl, .wordmark .s {
     width:200px;
     height:60px;
   }
 
-  .d img {
+  .asl img {
     width:200px;
     display:inline;
     margin-left:20px;

@@ -5,25 +5,19 @@
   import Footer from "./stand/Footer.svelte"
   import inView from "$actions/inView.js";
   import content from "$data/copy.json"
+  
   import {fade,fly} from 'svelte/transition';
-  import {Container,Row,Col,TabContent, TabPane, Carousel, CarouselControl, CarouselIndicators, CarouselItem} from 'sveltestrap'
+  import {Container,Row,Col,Collapse,Button,Card} from 'sveltestrap'
   import viewport from "$stores/viewport.js"
   import Boundary from "../components/helpers/Boundary.svelte"
   let isInView;
-  let tabView = "c1";
-  let tabUrl;
-  const items = [
-    'tegan',
-    'ubcic'
-  ];
-  let activeIndex = 0;
-
+  let isOpen;
 
 </script>
 
 <Meta />
 
-<section class="cover" style="height:{$viewport.height-8}px;background-image:url('assets/ogbg.jpeg')">
+<section class="cover" style="height:{$viewport.height-8}px;background-image:url('assets/cover.jpeg')">
   <div class="overlay">
     <Header />
     <div class="cover-content">
@@ -34,220 +28,239 @@
   <Container>
     <Row>
       <Col sm=12 md=8 lg=8>
-        <h1>{content.Title}</h1>
-        <h3>{content.Intro} <span class="highlight"> {content.Highlight}</span></h3>
+        <h1>Practice what you preach: Open Letter to Lululemon</h1>
+        <h3>As yoga teachers and practitioners concerned with the health of the planet, climate and human communities, we ask lululemon to publicly commit to phase out coal and switch to 100% renewable energy for its supply chain by 2030.</h3>
       </Col>
       <Col sm=12 md=4 lg=4>
         <div class="primary-nav">
-          <a href="#map">Explore the map</a>
-          <a href="#evidence">See the evidence</a>
-          <a href="#timeline">How we got here</a>
+          <a href="#letter">READ THE OPEN LETTER</a>
+          <a href="#signup">ADD YOUR NAME</a>
           <div class="social-share">
-            <a target="_new" href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fpublications.stand.earth%2Fold-growth"><button class="facebook"><Icon name="facebook" stroke="var(--white)" stroke-width=2 width="30" /></button></a>
-            <a target="_new" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fpublications.stand.earth%2Fold-growth%2F&via=standearth&text=text=Check%20out%20this%20website%20%40standearth%20just%20launched%20exposing%20B.C.%E2%80%99s%20%23oldgrowth%20scandal%F0%9F%98%A1%20This%20irrefutable%20evidence%20proves%20that%20the%20%40bcndp%20has%20been%20engaging%20in%20a%20disinformation%20campaign,%20grandstanding%20protecting%20these%20ancient%20forests%20when%20they%E2%80%99re%20still%20being%20logged%20by%20big%20corporations"><button class="twitter"><Icon name="twitter" stroke="var(--white)" stroke-width=2 width="30"/></button></a>
+            <a target="_new" href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fpublications.stand.earth%2Fyoga-letter"><button class="facebook"><Icon name="facebook" stroke="var(--white)" stroke-width=2 width="30" /></button></a>
+            <a target="_new" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fpublications.stand.earth%2Fyoga-letter%2F&via=standearth"><button class="twitter"><Icon name="twitter" stroke="var(--white)" stroke-width=2 width="30"/></button></a>
           </div>
       </div>
       </Col>
     </Row>
 </Container>
 </section>
-<section class="map">
-  <Boundary left_spacing='50' color='var(--white)' orientation='triangle'/> 
-    <div class="map-content">
-      <Container>
-        <Row>
-          <div style="margin-top:-{$viewport.height/6}px;" use:inView={{ bottom: 250 }} on:enter={( ) => isInView="visible"} on:exit={() => isInView="nope"}>
-            <Col sm=12 md={{size:8,offset:2}} lg={{size:8,offset:2}}>
-              {#if isInView == "visible"}
-              <div class="deferral" transition:fly="{{ y: 200, duration: 1000 }}">
-                <h3><i>{content.Deferral.Title}</i></h3>
-                <p>{@html content.Deferral.Content} </p>
-              </div>
-              {/if}
-            </Col>
-          </div>
-        </Row>
-        <Row>
-          <Col sm=12 md={{size:10, offset:1}} lg={{size:10, offset:1}}>
-            <a name="map"></a>
-            <h2>{content.Map.Heading}</h2>
-            <p>{content.Map.Subheading}</p>
-          </Col>
-        </Row>
-      </Container>
-      <iframe src="https://angio.maps.arcgis.com/apps/instant/sidebar/index.html?appid=52786208488e4e58a83fbe05db14c50c" width="100%" height="700" frameborder="0" style="border:0" allowfullscreen>iFrames are not supported on this page.</iframe>  
-    </div>
-</section>
 
-<section class="evidence">
 
-  <div id="evidence-header" style="background-image:url('assets/cover3.jpeg');">
-    <div id="evidence-copy">
-      <h2>{content.Evidence.Heading}</h2>
-      <p style='padding-bottom:50px;'>{content.Evidence.Subheading}</p>
-    </div>
-  </div>
-  <div class="navigation">
-    <!-- svelte-ignore a11y-missing-content -->
-    <a name="evidence"></a>
-    <Container>
-  
-      <Row>
-      <Col sm=12 md=12 lg=12>
-    <TabContent pills on:tab={(e) => (tabView = e.detail)}>
-      <TabPane tabId="c1" active>
-        <span slot="tab">
-          <h4>Sinclair Group</h4>
-        </span>
-        
-          {#if tabView == "c1"}
-          <div class="clearcut" transition:fly="{{ y: 200, duration: 1000 }}">
-            <p><i> Candidate deferral in the north-central interior, logged by Sinclair Group. Deferral outlined in green, logged area shaded red.</i></p>
-            <iframe frameborder="0" class="juxtapose" width="100%" height="700" src="https://cdn.knightlab.com/libs/juxtapose/latest/embed/index.html?uid=b6cf8e06-256c-11ed-b5bb-6595d9b17862"></iframe>
-            
-          </div>  
-          {/if}
-        
-      </TabPane>
-      <TabPane tabId="c2">
-        <span slot="tab">
-          <h4>Canfor</h4>
-        </span> 
-        {#if tabView == "c2"}
-          <div class="clearcut" transition:fly="{{ y: 200, duration: 1000 }}">
-            <p> Candidate deferral in the north-central interior, logged by Canfor. Deferral outlined in green, logged area shaded red.</p>
-            <iframe frameborder="0" class="juxtapose" width="100%" height="700" src="https://cdn.knightlab.com/libs/juxtapose/latest/embed/index.html?uid=2d9a1362-27e8-11ed-b5bb-6595d9b17862"></iframe>
-          </div>  
-        {/if}
-      </TabPane>
-      <TabPane tabId="c3">
-        <span slot="tab">
-          <h4>Western Forest Products</h4>
-        </span> 
-        {#if tabView == "c3"}
-          <div class="clearcut" transition:fly="{{ y: 200, duration: 1000 }}">
-            <p> Candidate deferral in coastal Vancouver Island, logged by Western Forest Products. Deferral outlined in green, logged area shaded red.</p>
-            <iframe frameborder="0" class="juxtapose" width="100%" height="700" src="https://cdn.knightlab.com/libs/juxtapose/latest/embed/index.html?uid=5107bcd4-27cd-11ed-b5bb-6595d9b17862"></iframe>
-          </div>  
-        {/if}
-      </TabPane>
-      <TabPane tabId="c4">
-        <span slot="tab">
-          <h4>Coastal GasLink</h4>
-        </span> 
-        {#if tabView == "c4"}
-          <div class="clearcut" transition:fly="{{ y: 200, duration: 1000 }}">
-            <p> Candidate deferral in the north-west of BC, logged by Coastal GasLink. Deferral outlined in green, logged area shaded red.</p>
-            <iframe frameborder="0" class="juxtapose" width="100%" height="700" src="https://cdn.knightlab.com/libs/juxtapose/latest/embed/index.html?uid=7b57bab4-27e8-11ed-b5bb-6595d9b17862"></iframe>
-          </div>  
-        {/if}
-      </TabPane>
-      <TabPane tabId="c5">
-        <span slot="tab">
-          <h4>West Fraser</h4>
-        </span> 
-        {#if tabView == "c5"}
-          <div class="clearcut" transition:fly="{{ y: 200, duration: 1000 }}">
-            <p> Candidate deferral in the Cariboo, logged by West Fraser. Deferral outlined in green, logged area shaded red.</p>
-            <iframe frameborder="0" class="juxtapose" width="100%" height="700" src="https://cdn.knightlab.com/libs/juxtapose/latest/embed/index.html?uid=aa48d5bc-27cd-11ed-b5bb-6595d9b17862"></iframe>
-          </div>  
-        {/if}
-      </TabPane>
-      <TabPane tabId="c6">
-        <span slot="tab">
-          <h4>Trans Mountain</h4>
-        </span> 
-        {#if tabView == "c6"}
-          <div class="clearcut" transition:fly="{{ y: 200, duration: 1000 }}">
-            <p> Candidate deferral in the southern interior, logged by Trans Mountain. Deferral outlined in green, logged area shaded red. </p>
-            <iframe frameborder="0" class="juxtapose" width="100%" height="700" src="https://cdn.knightlab.com/libs/juxtapose/latest/embed/index.html?uid=6ade917c-27ce-11ed-b5bb-6595d9b17862"></iframe>
-          </div>  
-        {/if}
-      </TabPane>
-    </TabContent>
-    </Col>
-  </Row>
-    <div class="report">
-      <Row>
-      <Col sm=12>
-        <a href="https://www.stand.earth/sites/stand/files/tall_talk_final.pdf"><h2>Download the full report from Stand.earth Research Group <Icon name="download" stroke="var(--stand-primary)" stroke-width=2 width="40" /></h2><img src="assets/report_cover.png"></a>
-      </Col>
-    </Row>
-    </div>  
-  </Container>
-  </div>
-</section>
-
-<section class="timeline">
-  <Boundary left_spacing='17' color='var(--white)' orientation='triangle'/> 
-  <div class="timeline-content">
+<section class="letter">
+  <div class="letter-content">
+    <a name="letter"></a>
     <Container>
       <Row>
-        <Col sm=12 md=4 lg=4>
-          <a name="timeline"></a>
-          <h2>{content.Timeline.Headline}</h2>
-          <p>{content.Timeline.Description}</p>
-        </Col>
         <Col sm=12 md=8 lg=8>
-          <iframe src='https://cdn.knightlab.com/libs/timeline3/latest/embed/index.html?source=1h7qOZecmsiWzR0kaWz52Z1RnEzbUObX4Cz4WlhcBUP8&font=Default&lang=en&initial_zoom=2&height=650' width='100%' height='650' webkitallowfullscreen mozallowfullscreen allowfullscreen frameborder='0'></iframe>                            
+          <p>To Glenn K. Murphy, Chairman of the Board, lululemon</p>
+
+          <p>Dear Mr. Murphy,</p>
+
+<p><b>As yoga teachers, we ask lululemon to commit to phase out coal and source 100 percent renewable energy across its supply chain.</b></p>
+
+<p>lululemon is one of the largest, fastest growing and most profitable fitness apparel brands in the world.</p>
+
+<p>lululemon’s marketing claims its clothes are ‘designed by yogis’ and offers connection to a global community of mindfulness practitioners, sporting leaders and health and wellness professionals.</p>
+
+<p><b><u>Yet almost half of the energy powering lululemon factories comes from burning coal.</u></b></p>
+
+<p><b>lululemon’s reliance on coal as a source of energy is extremely harmful to people and the environment, particularly in countries like Vietnam, Cambodia, China, Sri Lanka, and Bangladesh, where its products are made.</b> Fossil fuels like coal cause dangerous climate change and air pollution that is responsible for the deaths of millions of people around the world each year. Nearly one in five premature deaths globally are attributed to air pollution that’s caused by fossil fuels, according to a 2018 Harvard study.</p>
+
+<p><b>lululemon’s current climate commitments fail to adequately address its pollution.</b> In fact, its total GHG emissions are increasing due to the company’s rapid growth. In order for the company to meet the Paris agreement targets, lululemon has to take immediate action to phase out coal and other fossil fuels from its supply chain.</p>
+
+<p><b>lululemon: Please commit to immediately phase out coal and source 100 percent renewable energy such as solar and wind for your factories and across your supply chain.</b></p>
+
+<p>Sincerely,</p>
+
+<Button color="light" on:click={() => (isOpen = !isOpen)}>
+  <h3>47 yoga teachers signed representing 3 continents</h3>
+  View signatories
+</Button>
+
+<Collapse {isOpen}>
+  <Card body>
+
+    <ol>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Frank Jesse, Senior Iyengar Teacher, Griffins Hill Yoga Retreat, Australia&nbsp;</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Amanda Hood, Senior Iyengar Teacher, Hamilton Yoga, Australia&nbsp;</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Simon Joannou, Senior Iyengar Teacher, Marickville Yoga, Australia&nbsp;</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Julie Hodges PhD, Senior Iyengar Teacher, Lismore Yoga School, Australia&nbsp;</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Pixie Lillas, Director, Balmain Iyengar Yoga School, Australia&nbsp;</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Arjun von Caemmerer, Senior Teacher, Hobart School of Iyengar Yoga, Australia&nbsp;</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Simon Marrocco, Founder and Director, St Kilda Iyengar Yoga School, Australia&nbsp;</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Ashlea Wilken, Manager, YogaWest, Australia&nbsp;</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Akhila Hughes, The Yoga Workshop, Australia&nbsp;</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Bronwyn Rust, Senior Iyengar Teacher, Yogaville, Australia.</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Joanna Benn, Every Body Yoga, United Kingdom</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Nikki Calonge, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Aileen Epstein-Ignadiou, Las Vegas, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Galen Tromble, ClimateYogi.org, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Sharon Steffensen, Yoga Chicago Magazine, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Ingela Abbott, Founder-Yoga Northwest, Bellingham WA, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Nancy Gilgoff, The House of Yoga and Zen, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Annie Piper, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Dass Padmani, Golden Bridge Yoga, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Margi Young, Nest Yoga Center, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Michael Cecconi, Running Yoga, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Shiva Rea, Samudra, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">David Miliotis, Samjiva Nilayam, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Andrea Mullen, Tranquility, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Joan White, Iyengar Yoga School of Philadelphia, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Leslie Howard, Nest Yoga, Oakland CA, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Andrew Hillam, Jois Yoga, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Cyndi Lee, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Jane DoCampo, Sarasota Scoliosis &amp; Backcare, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Tias and Surya Little, PrajnaYoga, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Sarah Wilner, Nest, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Penny Dedel, Innerstellar, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Dafna Sarnoff, Shala, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Eddie Stern, Ashtanga Yoga New York, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">David E Morreno, Yoga Alliance, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Sarah Trelease, Sola School, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Caron James, Margo Young Yoga, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Linda Collery, Independent Yoga Teacher, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Erika Trice, Yoga Works, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Tias Little, Prajna Yoga, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Annie Carpenter, SmartFlow Yoga, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Rachel Nicks, MIRROR and lululemon Ambassador, United States&nbsp;</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Kim Stabbe, Blue Yoga &amp; Wellness, United States</p>
+      </li>
+      <li aria-level="1" dir="ltr">
+      <p dir="ltr" role="presentation">Josh Schrei, Tapta Marg Productions, United States</p>
+      </li>
+    </ol>
+  </Card>
+</Collapse>
         </Col>
       </Row>
     </Container>
   </div>
 </section>
 
-<section class="video">
-  <Boundary left_spacing='17' color='var(--white)' orientation='triangle'/> 
-  <div class="video-content">
-    <Container>
-      <Row>
-        <Col sm=12 md=12 lg=12>
-          <a name="video"></a>
-          <h2 style="text-align:center;padding-bottom:20px;">The Whole World Is Watching</h2>
-          <p>{content.Quote}</p>
-        </Col>
-      </Row>
-      <Row>
-        <Col sm=12 md={{size:6,offset:3}} lg={{size:6,offset:3}}>
-          <iframe width="100%" height="415" src="https://www.youtube.com/embed/EfyEYE650t8?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </Col>
-        </Row>
-      </Container>
-          
-          <Carousel {items} bind:activeIndex>
-            <CarouselIndicators bind:activeIndex {items} />
-          
-            <div class="carousel-inner">
-              {#each items as item, index}
-                <CarouselItem bind:activeIndex itemIndex={index}>
-                  {#if activeIndex==0}
-                  <div class="carousel-wrapper" style="background-image:url('assets/quote.jpeg');">
-                    <div id="quotecopy">
-                    
-                      <p><i>"The current divisive picture of old growth logging has been, and continues to be, exacerbated by the B.C. government fostering an economic dependence on logging for First Nations through limited revenue-sharing, joint ventures, employment, and tenures in contentious areas where First Nations face limited alternate economic opportunities as a result of years of colonialism and racism."</i></p>
-                      <p><a href="https://assets.nationbuilder.com/ubcic/pages/132/attachments/original/1655425546/2022_CC06_Combined_Resolutions.pdf?1655425546">Resolution no. 2022-28</a></p>  
-                      <p style="font-size:11px;"><i>Image credit: Alex Tsui, Wilderness Committee.</i></p>
-                  </div>
-                  </div>
-                  {/if}
-                  {#if activeIndex==1}
-                  <div class="carousel-wrapper2" style="background-image:url('assets/quote2.jpeg');">
-                    <div id="quotecopy">
-                    
-                      <p><i>"The evidence of the scale and severity of ongoing logging in proposed deferral areas means that, at best, provincial officials are completely unaware of what’s happening and trusting the word of corporations who profit from cutting down these forests. At worst, the province is engaging in a disinformation campaign to convince constituents that it is fulfilling its promises to protect old growth forests while actually avoiding meaningful action to curtail the industry."</i></p>
-                      <p><b>Angeline Robertson, Senior Research, Stand.earth Research Group and Senior Forest Campaigner Tegan Hansen, Stand.earth</b></p>  
-                  </div>
-                  </div>
-                  {/if}
-                  
-                </CarouselItem>
-              {/each}
-            </div>
-          
+<section class="quotes">
+  <Container>
+    <Row>
+      <Col sm=12 md=6 lg=4 >
+          <div class="headshot" id="quote1" style="background-image:url('assets/quote1.jpeg')">
+          <p>Sierra Hollister, Living Yoga, US</p>
+        </div>
+        <div class="quote">
+        <p>
+          "Right action, recognizing all manifestations of life as equal – this is true devotion. To care for earth and each other is a fundamental part of living our yoga. I’m calling on lululemon to embody right action and quit coal and commit to renewable energy. All life is imperiled by climate change and lululemon is well-positioned as one of the largest yoga apparel manufacturers in the world to have an impact on climate and change industry standards. That’s a win / win by any standard."
+        </p>
+      </div>
+      </Col>
+      <Col sm=12 md=6 lg=4 >
+        <div class="headshot" id="quote2" style="background-image:url('assets/quote2.jpg')">
+          <p>Joanna Benn, Every Body Yoga, UK</p></div>
+          <div class="quote"><p>"We need to halve global emissions in the next 8 years if we are to have a liveable Earth. We must, as yoga practitioners, lead through ahimsa, non-harming and make every effort along the supply chain and in all our actions to do the right, if sometimes, more challenging thing. Coal is not clean. It’s time to go 100% renewable."</p></div>
+      </Col>
+      <Col sm=12 md=6 lg=4 >
+        <div class="headshot" id="quote3" style="background-image:url('assets/quote3.jpeg')"><p>Galen Thromble, Climate Yogi, US</p></div>
+        <div class="quote"><p>"To end the climate crisis, everything matters, even how our clothes are made. I urge lululemon to bring its supply chain’s climate impacts in line with its environmental and social values by committing to quit coal and transition to 100% renewable by 2030."</p></div>
+      </Col>
+    </Row>
+  </Container>
 
-          </Carousel>
-  </div>
 </section>
+
+<section class="signup">
+  <Container>
+    <Row>
+      <Col sm=12 md={{size:8,offset:2}}>
+        <a name="signup"></a>
+        <h2>Add your name</h2>
+        <iframe src="https://act.stand.earth/page/43909/survey/1" width="100%" height="1050"></iframe>
+      </Col>
+    </Row>
+  </Container>
+</section>
+
 
 
 
@@ -276,80 +289,16 @@
   .cover .overlay {
     width:100%;
     height:100%;
-    background:linear-gradient(rgba(18, 138, 18, 0.1),rgba(255,255,255,1));
+    background:linear-gradient(rgba(18, 138, 18, 0.0),rgba(255,255,255,0.9));
   }
 
-  .carousel-wrapper {
-    
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-size: cover;
-    min-height:700px;
-  }
-
-#evidence-header {
-    background-position: top; /* Center the image */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-size: cover;
-    width:100%;
-    min-height:400px;
-    padding-top:50px;
-    padding-bottom:50px;
-    margin-bottom:20px;
-}
-
-#evidence-copy {
-    width:80%;
-    margin-left:auto;
-    margin-right:auto;
-    padding:40px;
-    background:rgba(255,255,255,0.8)
-    }
-
-  .carousel-wrapper2 {
-    
-    background-position: top; /* Center the image */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-size: cover;
-    min-height:700px;
-  }
-
-  .carousel-inner {
-    width:100%;
-  }
-
-  #quotecopy {
-    width:50%;
-    float:right;
-    margin:50px;
-
-    background:rgba(255,255,255,0.7);
-    padding:50px 50px 30px 30px;
-  }
 
   .cover-content {
       padding-top:30%;
   }
 
-  .timeline {
-    background:#F2F2F2;
-  }
-
-  .timeline-content {
-    padding-top:50px;
-  }
-
-  .clearcut {
-    width:90%;
-    margin:auto;
-  }
-
-  .video {
-    text-align:center;
-  }
-
-  .evidence {
-    padding-bottom:100px;
+  .letter-content {
+    padding:50px;
   }
 
   #bdry-left {
@@ -363,38 +312,43 @@
     margin-top:-10px;
   }
 
-.report {
-  width:100%;
-  text-align:center;
-  padding-top:50px;
-}
+  .headshot {
+    min-height:500px;
+    border-radius:30px;
+    background-position: top; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
+    position:relative;
+  }
 
-.report h2 {
-  max-width:550px;
-  margin:auto;
-}
+  .headshot p {
+    color:#fff;
+    background:rgba(0,0,0,0.3);
+    text-align:center;
+    position:absolute;
+    padding-top:10px;
+    padding-bottom:10px;
+    bottom:18px;
+    width:100%;
+  }
 
-.report img {
-  max-width:450px;
-  margin:auto;
-}
-
-.report a {
-  text-decoration:none;
-  max-width:550px;
-  color:var(--stand-primary);
-}
+  .quote {
+    width:80%;
+    border-radius:10px;
+    margin:auto;
+    background:rgb(236, 236, 236);
+    padding:20px;
+    margin-top:-15px;
+    position:relative;
+    top:-20px;
+  }
 
   @media (max-width:530px) {
     #bdry-left,#bdry-right {
       display:none;
     }
 
-    #quotecopy {
-    width:80%;
-    float:right;
-    margin:50px;
-    }
+
   }
 
 
@@ -402,26 +356,10 @@
     padding-bottom:150px;
   }
 
-  #highlight {
-   font-weight:bold;
+  .signup {
+    padding-top:40px;
+    text-align:center;
   }
-
-  .map {
-    background:#2B2B2B;
-    color:var(--white);
-  }
-
-  .map h2 {
-    padding-top:50px;
-  }
-
-  .deferral {
-    background:#F2F2F2;
-    border:2px solid var(--stand-primary);
-    color:#212529;
-    padding:50px;
-  }
-
 
   .primary-nav {
     font-size:20px;

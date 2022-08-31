@@ -8,32 +8,32 @@
 
 <svelte:head>
 	<!-- HEAD -->
-	<title>B.C.'s Old Growth Scandal | Stand.earth</title>
+	<title>Practice what you preach: Open Letter to Lululemon</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="description" content="B.C. government is approving forest destruction at alarming rates." />
+	<meta name="description" content="As yoga teachers and practitioners, we ask lululemon to commit to phase out coal and source 100 percent renewable energy across its supply chain." />
 	<meta name="author" content="Stand.earth" />
 	<meta name="news_keywords" content="" />
 
-	<meta property="og:title" content="B.C.'s Old Growth Scandal | Stand.earth" />
+	<meta property="og:title" content="Practice what you preach: Open Letter to Lululemon" />
 	<meta property="og:site_name" content="Stand.earth" />
-	<meta property="og:url" content="https://publications.stand.earth/old-growth/" />
-	<meta property="og:description" content="B.C. government is approving forest destruction at alarming rates." />
+	<meta property="og:url" content="https://publications.stand.earth/yoga-letter/" />
+	<meta property="og:description" content="As yoga teachers and practitioners, we ask lululemon to commit to phase out coal and source 100 percent renewable energy across its supply chain." />
 	<meta property="og:type" content="article" />
 	<meta property="og:locale" content="en_US" />
 
-	<meta property="og:image" content="https://publications.stand.earth/old-growth/assets/tw.png" />
+	<meta property="og:image" content="https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10046/imgonline-com-ua-CompressToSize-aSaGUGhdUN3.jpeg?v=1657902529000" />
 	<meta property="og:image:type" content="image/jpeg" />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="600" />
 
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:site" content="https://publications.stand.earth/old-growth/" />
+	<meta name="twitter:site" content="https://publications.stand.earth/yoga-letter/" />
 	<meta name="twitter:creator" content="@standearth" />
-	<meta name="twitter:title" content="B.C.'s Old Growth Scandal | Stand.earth" />
-	<meta name="twitter:description" content="B.C. government is approving forest destruction at alarming rates." />
-	<meta name="twitter:image:src" content="https://publications.stand.earth/old-growth/assets/tw.png" />
+	<meta name="twitter:title" content="Practice what you preach: Open Letter to Lululemon" />
+	<meta name="twitter:description" content="As yoga teachers and practitioners, we ask lululemon to commit to phase out coal and source 100 percent renewable energy across its supply chain." />
+	<meta name="twitter:image:src" content="https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10046/imgonline-com-ua-CompressToSize-aSaGUGhdUN3.jpeg?v=1657902529000" />
 	
 
 	<meta name="robots" content="max-image-preview:large" />
